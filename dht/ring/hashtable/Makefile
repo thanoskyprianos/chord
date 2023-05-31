@@ -1,5 +1,5 @@
 CC = gcc
-OBJS = hashtable_test.o hashtable.o ../list/list.o ../../../utils/utils.o
+OBJS = hashtable.o hashtable_test.o ../../node/node.o ../../../utils/utils.o ../list/list.o ../../client/hashtable/hashtable.o ../../client/list/list.o
 FLAGS = -g3 -Wall -Werror -Wextra -pedantic -lcrypto -lssl
 MAKE = make -s
 
@@ -12,10 +12,14 @@ ifndef PRINT
 endif
 
 test: $(OBJS)
+	$(MAKE) hashtable.o
 	$(CC) $(OBJS) $(FLAGS) -o test
 
 hashtable.o: hashtable.c hashtable.h
 	$(MAKE) -C ../list list.o
+	$(MAKE) -C ../../client/hashtable hashtable.o
+	$(MAKE) -C ../../client/list list.o
+	$(MAKE) -C ../../node node.o
 	$(MAKE) -C ../../../utils utils.o
 	$(CC) $(FLAGS) -c hashtable.c
 

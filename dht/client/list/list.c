@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 #include "list.h"
-#include "../hashtable/hashtable.h"
 
 struct list_node_client_tag {
   keyType key;

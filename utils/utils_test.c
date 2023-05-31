@@ -22,8 +22,15 @@ void test_random_ip(void) {
   free(ip);
 }
 
+void test_hash(void) {
+  size_t hash1 = hash("John");
+
+  TEST_CHECK(hash1 >= 0 && hash1 <= 255);
+}
+
 TEST_LIST = {
   {"string_copy", test_string_copy},
   {"random_ip", test_random_ip},
+  {"hash", test_hash},
   {NULL, NULL}
 };

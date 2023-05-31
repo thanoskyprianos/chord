@@ -1,5 +1,5 @@
 CC 	 = gcc
-OBJS = main.o ./dht/client/list/list.o ./dht/client/hashtable/hashtable.o ./dht/dht.o ./utils/utils.o
+OBJS = main.o ./dht/client/list/list.o ./dht/client/hashtable/hashtable.o ./dht/ring/hashtable/hashtable.o ./dht/ring/list/list.o ./dht/node/node.o ./dht/dht.o ./utils/utils.o
 FLAGS = -g3 -Wall -Werror -Wextra -pedantic -lcrypto
 MAKE = make -s
 
@@ -20,14 +20,24 @@ main: $(OBJS)
 
 test:
 	$(MAKE) -C ./dht/client/list test
+	$(MAKE) -C ./dht/ring/list test
+
 	$(MAKE) -C ./dht/client/hashtable test
+	$(MAKE) -C ./dht/ring/hashtable test
+
 	$(MAKE) -C ./utils test
 
 	@echo "\n$(CYAN)List tests (Client):$(RESET)"
 	./dht/client/list/test
 
+	@echo "\n$(CYAN)List tests (Ring):$(RESET)"
+	./dht/ring/list/test
+
 	@echo "\n$(CYAN)Hashtable tests (Client):$(RESET)"
 	./dht/client/hashtable/test
+
+	@echo "\n$(CYAN)Hashtable tests (Ring):$(RESET)"
+	./dht/ring/hashtable/test
 
 	# @echo "\n$(CYAN)DHT tests:$(RESET)"
 	# ./dht/test
@@ -44,7 +54,12 @@ clean:
 	@echo "$(RED)Deleted files:$(RESET) main $(OBJS)"
 
 	rm -f main $(OBJS)
+	
 	$(MAKE) -C ./dht/client/list clean
+	$(MAKE) -C ./dht/ring/list clean
+
 	$(MAKE) -C ./dht/client/hashtable clean
+	$(MAKE) -C ./dht/ring/hashtable clean
+
 	# $(MAKE) -C ./dht clean
 	$(MAKE) -C ./utils clean

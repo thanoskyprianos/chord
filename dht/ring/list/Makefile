@@ -1,5 +1,5 @@
 CC = gcc
-OBJS = hashtable_test.o hashtable.o ../list/list.o ../../../utils/utils.o
+OBJS = list.o list_test.o ../../node/node.o ../../../utils/utils.o ../../client/hashtable/hashtable.o ../../client/list/list.o
 FLAGS = -g3 -Wall -Werror -Wextra -pedantic -lcrypto -lssl
 MAKE = make -s
 
@@ -14,10 +14,11 @@ endif
 test: $(OBJS)
 	$(CC) $(OBJS) $(FLAGS) -o test
 
-hashtable.o: hashtable.c hashtable.h
-	$(MAKE) -C ../list list.o
+list.o: list.c list.h
+	$(MAKE) -C ../../node node.o
+	$(MAKE) -C ../../client/hashtable hashtable.o
 	$(MAKE) -C ../../../utils utils.o
-	$(CC) $(FLAGS) -c hashtable.c
+	$(CC) $(FLAGS) -c list.c
 
 .PHONY: clean
 clean:

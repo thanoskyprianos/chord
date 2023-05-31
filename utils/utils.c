@@ -12,8 +12,7 @@ void string_copy(char **dest, char *src) {
   memcpy((*dest), src, len + 1);
 }
 
-char *random_ip(void) {
-  srand(time(NULL));
+keyType random_ip(void) {
 
   char ip[16]; // xxx.xxx.xxx.xxx + '\0'
   char temp[4];
@@ -32,7 +31,7 @@ char *random_ip(void) {
 
   char *final;
   string_copy(&final, ip);
-  return final;  
+  return (keyType)final;
 }
 
 size_t hash(keyType key) {

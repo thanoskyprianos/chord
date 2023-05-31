@@ -1,6 +1,5 @@
-#include <stdio.h> // delete later
+#include <stdio.h>
 #include <stdlib.h>
-#include <openssl/sha.h>
 
 #include "hashtable.h"
 #include "../list/list.h"
@@ -10,12 +9,12 @@ struct hash_table_client_tag {
   list_node_client *table;
 };
 
-hash_table_client hashtable_create_client(int size) {
+hash_table_client hashtable_create_client(size_t size) {
   hash_table_client new = malloc(sizeof *new);
   new->size = size; new->item_count = 0;
 
   new->table = malloc(size * sizeof(list_node_client *));
-  for (int i = 0; i < size; i++)
+  for (size_t i = 0; i < size; i++)
     new->table[i] = NULL;
 
   return new;
@@ -59,12 +58,8 @@ hash_table_client hashtable_resize_client(hash_table_client ht) {
 
 size_t hashtable_size_client(hash_table_client ht) { return ht->size; }
 size_t hashtable_item_count_client(hash_table_client ht) { return ht->item_count; }
+float hashtable_load_factor_client(hash_table_client ht) { return (float)ht->item_count / (float)ht->size; }
 
-float hashtable_load_factor_client(hash_table_client ht) {
-  return (float)hashtable_item_count_client(ht) / (float)hashtable_size_client(ht);
-}
-
-// for debugging
 void hashtable_print_client(hash_table_client ht) {
   for(size_t i = 0; i < ht->size; i++) {
     printf("%zu: ", i);

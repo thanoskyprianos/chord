@@ -1,5 +1,5 @@
 CC = gcc
-OBJS = list.o list_test.o ../hashtable/hashtable.o ../../../utils/utils.o
+OBJS = list.o list_test.o ../../../utils/utils.o
 FLAGS = -g3 -Wall -Werror -Wextra -pedantic -lcrypto -lssl
 MAKE = make -s
 
@@ -12,11 +12,10 @@ ifndef PRINT
 endif
 
 test: $(OBJS)
-	$(MAKE) -C ../hashtable hashtable.o
-	$(MAKE) -C ../../../utils utils.o
 	$(CC) $(OBJS) $(FLAGS) -o test
 
 list.o: list.c list.h
+	$(MAKE) -C ../../../utils utils.o
 	$(CC) $(FLAGS) -c list.c
 
 .PHONY: clean

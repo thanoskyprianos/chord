@@ -71,19 +71,11 @@ void test_hashtable_item_count(void) {
   hashtable_destroy_client(ht);
 }
 
-void test_hash(void) {
-  size_t hash1 = hash("John");
-  char c = (char)hash1;
-
-  TEST_CHECK((size_t)c == hash1);
-}
-
 TEST_LIST = {
   { "hashtable_insert", test_hashtable_insert },
   { "hashtable_get", test_hashtable_get },
   { "hashtable_resize", test_hashtable_resize },
   { "hashtable_size", test_hashtable_size },
   { "hashtable_item_count", test_hashtable_item_count },
-  { "hash", test_hash },
   { NULL, NULL }
 };

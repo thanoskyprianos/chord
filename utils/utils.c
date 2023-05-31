@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
 #include <time.h>
 #include <openssl/sha.h>
@@ -39,4 +40,29 @@ size_t hash(keyType key) {
   SHA1((unsigned char *)key, strlen(key), hash_array);
 
   return (size_t)hash_array[0]; // first 8 bits of SHA1 key
+}
+
+bool is_prime(size_t n)
+{
+    if (n <= 1) return false;
+    if (n <= 3) return true;
+
+    if (n % 2 == 0 || n % 3 == 0) return false;
+   
+    for (size_t i = 5; i * i <= n; i += 6)
+        if (n % i == 0 || n % (i + 2) == 0)
+           return false;
+   
+    return true;
+}
+
+
+size_t next_prime(size_t n) {
+  if (n <= 1)
+    return 2;
+
+  size_t prime = n;
+  while (!is_prime(prime++));
+
+  return prime - 1;
 }

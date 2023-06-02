@@ -1,6 +1,6 @@
 CC 	 = gcc
 OBJS = main.o ./dht/client/list/list.o ./dht/client/hashtable/hashtable.o ./dht/ring/hashtable/hashtable.o ./dht/ring/list/list.o ./dht/node/node.o ./dht/dht.o ./utils/utils.o
-FLAGS = -g3 -Wall -Werror -Wextra -pedantic -lcrypto
+FLAGS = -g3 -Wall -Werror -Wextra -pedantic -lcrypto -lssl
 MAKE = make -s
 
 CYAN = \e[1;96m
@@ -11,12 +11,21 @@ ifndef PRINT
 .SILENT:
 endif
 
+run: main
+	./main
+	$(MAKE) clean
+
 main: $(OBJS)
 	$(MAKE) -C ./dht/client/list list.o
+	$(MAKE) -C ./dht/ring/list list.o
+
 	$(MAKE) -C ./dht/client/hashtable hashtable.o
+	$(MAKE) -C ./dht/ring/hashtable hashtable.o
+
 	$(MAKE) -C ./dht dht.o
 	$(MAKE) -C ./utils utils.o
-	$(CC) $(FLAGS) $(OBJS) -o main
+
+	$(CC) $(OBJS) $(FLAGS) -o main
 
 test:
 	$(MAKE) -C ./dht/client/list test
@@ -39,9 +48,6 @@ test:
 	@echo "\n$(CYAN)Hashtable tests (Ring):$(RESET)"
 	./dht/ring/hashtable/test
 
-	# @echo "\n$(CYAN)DHT tests:$(RESET)"
-	# ./dht/test
-
 	@echo "\n$(CYAN)Utils tests:$(RESET)"
 	./utils/test
 
@@ -61,5 +67,5 @@ clean:
 	$(MAKE) -C ./dht/client/hashtable clean
 	$(MAKE) -C ./dht/ring/hashtable clean
 
-	# $(MAKE) -C ./dht clean
+	$(MAKE) -C ./dht clean
 	$(MAKE) -C ./utils clean

@@ -44,9 +44,9 @@ list_node_client list_find_client(keyType key, list_node_client head) {
   return NULL;
 }
 
-keyType list_key_client(list_node_client node) { return node->key; }
-valueType list_value_client(list_node_client node) { return node->value; }
-list_node_client list_next_client(list_node_client node) { return node->next; }
+keyType list_key_client(list_node_client node) { return node != NULL ? node->key : NULL; }
+valueType list_value_client(list_node_client node) { return node != NULL ? node->value : -1; }
+list_node_client list_next_client(list_node_client node) { return node != NULL ? node->next : NULL; }
 
 // for debugging
 void list_print_client(list_node_client head) { 

@@ -12,6 +12,7 @@
 
 #define equal(a, b) (strcmp(a, b) == 0)
 
+// start types
 typedef char *keyType;
 typedef int valueType;
 
@@ -20,18 +21,23 @@ typedef struct hash_table_ring_tag *hash_table_ring;
 
 typedef struct list_node_client_tag *list_node_client;
 typedef struct list_node_ring_tag *list_node_ring;
+// end types
 
+// used in node creation and hashtable insertion
 void string_copy(char **dest, char *src);
 keyType random_ip(void);
 size_t hash(keyType key);
+
+// used in hashtable creation
 bool is_prime(size_t n);
 size_t next_prime(size_t n);
 
+
+// used in main's menus
 #define CYAN "\033[0;96m"
 #define RED "\033[0;91m"
 #define GREEN "\033[0;92m"
 #define RESET "\033[0m"
-
 #define CLIENTS_PER_SCREEN 16
 
 void clear_previous_input(void);

@@ -12,7 +12,7 @@
 The files in this directory try to simulate a distributed hash table using the Chord protocol.
 
 ## How the program works
-* To simulate multiple clients in one computer I decided to use a seperate hash table for the entire network. The hash table stores the nodes and by hashing an IP address represented by a string, we get the client we want as a `nodeType` object. Every `nodeType` contains its IP address as well as its personal hash table that is used to store our `(key, value)` data pairs.
+* To simulate multiple clients in one computer I decided to use a seperate hash table for the entire network. The hash table stores the nodes and by hashing an IP address represented by a string, we get the client we want as a `nodeType` object. Every `nodeType` contains its IP address, its finger table and as its personal hash table that is used to store our `(key, value)` data pairs.
 * Both hash tables use seperate chaining to handle collisions.
 * As the Chord paper suggests, both the IP addresses and the keys are hashed using SHA-1. The `MAXNODENUMBER` macro is set to 256 so the hash function returns the first byte of the hash as an integer.
 * All nodes are being initialized with a random IP address using the `random_ip()` function. In the process of initialization, every node is sorted into a temporary array. This is done to make the finger table creation easier.

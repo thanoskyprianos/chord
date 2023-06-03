@@ -46,8 +46,8 @@ void terminate(void) {
 }
 
 void insert(nodeType node, keyType key, valueType value) {
-
-  nodeType successor = find_successor(node, hash(key) % hashtable_size_ring(ring));
+  size_t client_index = hash(key) % hashtable_size_ring(ring);
+  nodeType successor = find_successor(node, client_index);
 
   hashtable_insert_client(key, value, node_hashtable(successor));
 }

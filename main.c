@@ -127,12 +127,13 @@ void lookup_menu(nodeType client, valueType (*lookup)(nodeType, keyType)) {
 int main(void) {
   initialize();
 
-  while (true) {
+  bool run = true;
+  while (run) {
     nodeType client = NULL;
 
     size_t choice = main_menu();
     switch (choice) {
-      case 0: terminate(); return 0;
+      case 0: run = false; continue;
       case 1: 
         client = client_select_menu();
         if(client == NULL) continue;
@@ -153,5 +154,6 @@ int main(void) {
 
   terminate();
 
+  printf("\n");
   return 0;
 }

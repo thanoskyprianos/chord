@@ -14,7 +14,7 @@ void sorted_insert(nodeType node, nodeType *nodes, size_t nodes_count) {
   nodes[i] = node;
 }
 
-hash_table_ring ring; // chord network
+hash_table_ring ring;       // chord network
 keyType ips[MAXNODENUMBER]; // ips of nodes 
 
 void initialize(void) {

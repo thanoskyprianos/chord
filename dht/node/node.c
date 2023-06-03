@@ -38,7 +38,7 @@ nodeType closest_preceding_node(nodeType node, size_t id) {
       return node->finger_table[i];
   }
 
-  return node;
+  return node->finger_table[0]; // range skipped, start from next node
 }
 
 nodeType smart_find_successor(nodeType node, size_t id) {

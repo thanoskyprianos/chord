@@ -66,3 +66,16 @@ size_t next_prime(size_t n) {
 
   return prime - 1;
 }
+
+void clear_previous_input(void) {
+  while(getchar() != '\n');
+}
+
+void clear_screen(void) {
+  printf("\033[1;1H\033[2J");
+}
+
+void wait_for_enter(void) {
+  printf("Press ENTER to continue...");
+  clear_previous_input();
+}

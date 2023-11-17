@@ -1,4 +1,4 @@
-# Question7 | Chord
+# Chord
 
 ## Table of contents
 * [Description](#description)
